@@ -1,0 +1,35 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - "transcriptyt-v*"
+      - "langchain-transcriptyt-v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pick package
+        id: pkg
+        run: |
+          case "$GITHUB_REF_NAME" in
+            langchain-transcriptyt-v*) echo "dir=langchain-transcriptyt" >> "$GITHUB_OUTPUT" ;;
+            *) echo "dir=transcriptyt" >> "$GITHUB_OUTPUT" ;;
+          esac
+      - name: Test and build
+        working-directory: ${{ steps.pkg.outputs.dir }}
+        run: |
+          pip install build -e ".[dev]"
+          pytest -q
+          python -m build
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: ${{ steps.pkg.outputs.dir }}/dist

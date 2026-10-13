@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "transcriptyt"
+dynamic = ["version"]
+description = "Python client for the TranscriptYT YouTube Transcript API: transcripts, batch, search, playlists, summaries."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+dependencies = ["httpx>=0.24"]
+keywords = ["youtube", "transcript", "captions", "subtitles", "youtube-transcript-api", "rag", "llm"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Topic :: Multimedia :: Video",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://transcript-yt.com"
+Documentation = "https://transcript-yt.com/docs"
+Repository = "https://github.com/aaditsshah25/transcriptyt-python"
+
+[project.optional-dependencies]
+dev = ["pytest", "respx"]
+
+[tool.hatch.version]
+path = "src/transcriptyt/_version.py"

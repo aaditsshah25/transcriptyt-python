@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "langchain-transcriptyt"
+version = "0.1.0"
+description = "LangChain integration for TranscriptYT: YouTube transcript document loader and agent tools."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+dependencies = ["langchain-core>=0.3", "transcriptyt>=0.1.0"]
+keywords = ["langchain", "youtube", "transcript", "document-loader", "rag"]
+
+[project.urls]
+Homepage = "https://transcript-yt.com"
+Documentation = "https://transcript-yt.com/docs"
+Repository = "https://github.com/aaditsshah25/transcriptyt-python"
+
+[project.optional-dependencies]
+dev = ["pytest", "respx"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/langchain_transcriptyt"]
