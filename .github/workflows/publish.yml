@@ -9,7 +9,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: pypi
+    environment: ${{ startsWith(github.ref_name, 'langchain-') && 'pypi-langchain' || 'pypi' }}
     permissions:
       id-token: write
     steps:
