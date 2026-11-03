@@ -206,11 +206,11 @@ class TranscriptYT(_Base):
         return self._request("GET", "/v1/languages", params={"url": url})
 
     def playlist(self, url: str, *, limit: Optional[int] = None) -> dict:
-        """List the videos in a playlist or a channel's uploads. Free."""
+        """List the videos in a playlist or a channel's uploads. Free on paid plans; the Free plan gets 10 a day, then 1 credit each."""
         return self._request("GET", "/v1/playlist", params={"url": url, "limit": limit})
 
     def search(self, q: str, *, channel: Optional[str] = None, limit: Optional[int] = None) -> dict:
-        """Search YouTube videos, optionally within one channel. Free."""
+        """Search YouTube videos, optionally within one channel. Free on paid plans; the Free plan gets 10 a day, then 1 credit each."""
         return self._request("GET", "/v1/search", params={"q": q, "channel": channel, "limit": limit})
 
     def summary(self, url: str, *, language: Optional[str] = None, translate_to: Optional[str] = None) -> dict:

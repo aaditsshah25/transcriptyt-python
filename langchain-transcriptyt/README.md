@@ -45,11 +45,11 @@ agent.invoke({"messages": [{"role": "user", "content": "Find a recent video on R
 ```
 
 - `youtube_transcript`: full transcript with `[HH:MM:SS]` timestamps (1 credit).
-- `youtube_search`: search YouTube, optionally within a channel (free).
+- `youtube_search`: search YouTube, optionally within a channel (free on paid plans; Free plan: 10 a day, then 1 credit).
 
 ## Pricing
 
-100 free credits, no card. Paid plans from $3/month. One credit per transcript; search, playlist and language lookups are free. See [transcript-yt.com/pricing](https://transcript-yt.com/pricing).
+100 free credits, no card. Paid plans from $3/month. One credit per transcript. Language lookups are free; search and playlist lookups are free on paid plans, and the Free plan gets 10 a day, then 1 credit each. See [transcript-yt.com/pricing](https://transcript-yt.com/pricing).
 
 ## License
 
