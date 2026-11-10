@@ -66,6 +66,28 @@ except TranscriptYTError as e:
     print(e.code, e.message)
 ```
 
+## Coming from youtube-transcript-api?
+
+[youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api) reads captions straight from YouTube, so it raises `RequestBlocked` or `IpBlocked` on AWS, Google Cloud, Vercel, Colab and most other servers, and 1.2 removed `get_transcript`. This client calls the TranscriptYT API instead, which runs the YouTube side on residential proxies and returns the same `text`, `start` and `duration` fields:
+
+```python
+# Before
+from youtube_transcript_api import YouTubeTranscriptApi
+segments = YouTubeTranscriptApi().fetch("dQw4w9WgXcQ", languages=["en"]).to_raw_data()
+
+# After
+from transcriptyt import TranscriptYT
+segments = TranscriptYT().transcript("dQw4w9WgXcQ", language="en")["segments"]
+```
+
+Differences: `language="de"` also matches regional tracks such as `de-DE` (no `NoTranscriptFound`), a missing language is translated from the original, and videos with no captions (`TranscriptsDisabled`) are transcribed with AI instead of failing. Failed requests aren't billed.
+
+Fix guides: [RequestBlocked / IpBlocked](https://transcript-yt.com/blog/youtube-transcript-api-request-blocked), [no attribute get_transcript](https://transcript-yt.com/blog/youtube-transcript-api-get-transcript-attributeerror), [NoTranscriptFound](https://transcript-yt.com/blog/youtube-transcript-api-no-transcript-found), [TranscriptsDisabled](https://transcript-yt.com/blog/youtube-transcript-api-transcripts-disabled), [AWS Lambda](https://transcript-yt.com/blog/youtube-transcript-api-aws-lambda), [Google Colab](https://transcript-yt.com/blog/youtube-transcript-api-google-colab).
+
+## AI agents and MCP
+
+The same API is an MCP server at `https://transcript-yt.com/mcp` (listed in the official MCP registry as `com.transcript-yt/transcriptyt`), so Claude Code, Cursor, Codex, VS Code and Claude Desktop can fetch transcripts as a tool. Setup: [transcript-yt.com/mcp-guide](https://transcript-yt.com/mcp-guide).
+
 ## Transcript options
 
 | Argument | Description |
